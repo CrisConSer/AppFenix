@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas Generales</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .stats-container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .chart-container {
+            width: 50%;
+            height: 400px;
+            align-items: center;
+        }
+
+        .stats-summary {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .stats-summary div {
+            flex: 1;
+            margin: 0 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <body>
+        <div class="container stats-container">
+            <h1>Estadísticas Generales</h1>
+            <div class="stats-summary">
+                <div>
+                    <h2>Total de Partidos</h2>
+                    <p>{{ total_matches }}</p>
+                </div>
+                <div>
+                    <h2>Partidos Ganados</h2>
+                    <p>{{ won_matches }}</p>
+                </div>
+                <div>
+                    <h2>Partidos Perdidos</h2>
+                    <p>{{ lost_matches }}</p>
+                </div>
+                <div>
+                    <h2>Porcentaje de Victorias</h2>
+                    <p>{{ win_percentage | round(2) }}%</p>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="matchesChart"></canvas>
+            </div>
+            <a href="/" class="button">Volver</a>
+        </div>
+    
+        <script>
+            // Obtener el contexto del canvas
+            var ctx = document.getElementById('matchesChart').getContext('2d');
+    
+            // Crear el gráfico
+            var matchesChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Ganados', 'Perdidos'],
+                    datasets: [{
+                        label: 'Partidos',
+                        data: [{{ won_matches }}, {{ lost_matches }}],
+                        backgroundColor: ['#4caf50', '#f44336'],
+                        borderColor: ['#fff', '#fff'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+    </html>
+    

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Rendimiento de Jugador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Rendimiento de {{ name }}</h1>
+        <img src="{{ url_for('static', filename='player_performance.png') }}" alt="Gráfico de Rendimiento">
+    </div>
+</body>
+</html>

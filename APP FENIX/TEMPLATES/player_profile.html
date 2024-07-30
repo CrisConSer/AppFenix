@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil de {{ name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Perfil de {{ name }}</h1>
+        
+        <h2>Estadísticas</h2>
+        <p>Partidos Ganados: {{ won }}</p>
+        <p>Partidos Perdidos: {{ lost }}</p>
+
+        <h2>Gráfico de Partidos Ganados vs Perdidos</h2>
+        <img src="{{ url_for('plot_player', name=name) }}" alt="Gráfico de Partidos Ganados vs Perdidos">
+
+        <h2>Partidos</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Rival</th>
+                <th>Jugador 1</th>
+                <th>Jugador 2</th>
+                <th>Pista</th>
+                <th>Puntos Jugador 1</th>
+                <th>Puntos Jugador 2</th>
+                <th>Total de Puntos</th>
+                <th>Resultado</th>
+                <th>Puntos de Sets</th>
+                <th>Fecha y Hora</th>
+                <th>Nombre de Rivales</th>
+                <th>Observaciones</th>
+            </tr>
+            {% for match in matches %}
+                <tr>
+                    <td>{{ match[0] }}</td>
+                    <td>{{ match[1] }}</td>
+                    <td>{{ match[2] }}</td>
+                    <td>{{ match[3] }}</td>
+                    <td>{{ match[4] }}</td>
+                    <td>{{ match[5] }}</td>
+                    <td>{{ match[6] }}</td>
+                    <td>{{ match[7] }}</td>
+                    <td>{{ match[8] }}</td>
+                    <td>{{ match[9] }}</td>
+                    <td>{{ match[10] }}</td>
+                    <td>{{ match[11] }}</td>
+                    <td>{{ match[12] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        
+        <h2>Detalles de Partidos</h2>
+        <table>
+            <tr>
+                <th>Número de Pista</th>
+                <th>Rival</th>
+                <th>Total de Puntos Obtenidos</th>
+            </tr>
+            {% for match in matches %}
+                <tr>
+                    <td>{{ match[4] }}</td>
+                    <td>{{ match[1] }}</td>
+                    <td>{{ match[7] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        
+        <br><br>
+        <a href="/" class="button">Volver</a>
+    </div>
+</body>
+</html>

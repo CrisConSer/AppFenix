@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Búsqueda de Partidos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Búsqueda de Partidos</h1>
+        <form action="/search_matches" method="post">
+            <label for="search_query">Buscar por Jugador o Rival:</label>
+            <input type="text" id="search_query" name="search_query" value="{{ search_query }}" required>
+            
+            <label for="result_filter">Filtrar por Resultado:</label>
+            <select id="result_filter" name="result_filter" required>
+                <option value="Ganado">Ganado</option>
+                <option value="Perdido">Perdido</option>
+            </select>
+
+            <button type="submit">Buscar</button>
+        </form>
+
+        {% if results %}
+        <h2>Resultados de la Búsqueda</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rival</th>
+                    <th>Jugador 1</th>
+                    <th>Jugador 2</th>
+                    <th>Pista</th>
+                    <th>Puntos Jugador 1</th>
+                    <th>Puntos Jugador 2</th>
+                    <th>Resultado Puntos</th>
+                    <th>Total de Puntos</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for match in results %}
+                <tr>
+                    <td>{{ match[0] }}</td>
+                    <td>{{ match[1] }}</td>
+                    <td>{{ match[2] }}</td>
+                    <td>{{ match[3] }}</td>
+                    <td>{{ match[4] }}</td>
+                    <td>{{ match[5] }}</td>
+                    <td>{{ match[6] }}</td>
+                    <td>{{ match[7] }}</td>
+                    <td>{{ match[8] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado de Predicción</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Resultado de Predicción</h1>
+        <p>Predicción para el partido entre {{ player1 }} y {{ player2 }}:</p>
+        <p>Puntos Jugador 1: {{ points_player1 }}</p>
+        <p>Puntos Jugador 2: {{ points_player2 }}</p>
+        <p>Resultado predicho: {{ result }}</p>
+        <p>Precisión del modelo: {{ accuracy }}</p>
+    </div>
+</body>
+</html>

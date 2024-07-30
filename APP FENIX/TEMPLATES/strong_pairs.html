@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicciones de Parejas Fuertes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Predicciones de Parejas Fuertes</h1>
+        {% if pairs %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jugador 1</th>
+                        <th>Posición</th>
+                        <th>Jugador 2</th>
+                        <th>Posición</th>
+                        <th>Total de Partidos</th>
+                        <th>Partidos Ganados</th>
+                        <th>Porcentaje de Victorias</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pair in pairs %}
+                    <tr>
+                        <td>{{ pair[0] }}</td>
+                        <td>{{ pair[4] }}</td>
+                        <td>{{ pair[1] }}</td>
+                        <td>{{ pair[5] }}</td>
+                        <td>{{ pair[2] }}</td>
+                        <td>{{ pair[3] }}</td>
+                        <td>{{ (pair[3] / pair[2] * 100) | round(2) }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No se encontraron parejas fuertes.</p>
+        {% endif %}
+    </div>
+
+    <a href="/" class="button">Volver</a>
+
+</body>
+</html>

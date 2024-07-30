@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Jugadora</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Buscar Jugadora</h1>
+        <form action="/search" method="post">
+            <label for="player_name">Nombre de la Jugadora:</label>
+            <input type="text" id="player_name" name="player_name" required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+</body>
+</html>

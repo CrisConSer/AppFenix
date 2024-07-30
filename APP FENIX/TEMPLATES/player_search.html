@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Búsqueda</title>
+</head>
+<body>
+    <h1>Resultados de Búsqueda para "{{ request.args.get('player') }}"</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Rival</th>
+                <th>Jugador 1</th>
+                <th>Jugador 2</th>
+                <th>Pista</th>
+                <th>Puntos Jugador 1</th>
+                <th>Puntos Jugador 2</th>
+                <th>Resultado Puntos</th>
+                <th>Total Puntos</th>
+                <th>Resultado</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if matches %}
+                {% for match in matches %}
+                <tr>
+                    <td>{{ match[1] }}</td>
+                    <td>{{ match[2] }}</td>
+                    <td>{{ match[3] }}</td>
+                    <td>{{ match[4] }}</td>
+                    <td>{{ match[5] }}</td>
+                    <td>{{ match[6] }}</td>
+                    <td>{{ match[7] }}</td>
+                    <td>{{ match[8] }}</td>
+                    <td>{{ match[9] }}</td>
+                    <td>{{ match[10] }}</td>
+                    <td>{{ match[11] }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="12">No se encontraron partidos para el jugador "{{ request.args.get('player') }}"</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <a href="/">Volver a la página principal</a>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumen por Partidos Jugados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Resumen por Partidos Jugados</h1>
+        <table>
+            <tr>
+                <th>Jugador</th>
+                <th>Total de Partidos Jugados</th>
+                <th>Partidos Ganados</th>
+                <th>Partidos Perdidos</th>
+                <th>Total de Puntos</th>
+            </tr>
+            {% for player_stat in player_stats %}
+            <tr>
+                <td>{{ player_stat[0] }}</td>
+                <td>{{ player_stat[1] }}</td>
+                <td>{{ player_stat[2] }}</td>
+                <td>{{ player_stat[3] }}</td>
+                <td>{{ player_stat[4] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <a href="/" class="button">Volver</a>
+
+</body>
+</html>

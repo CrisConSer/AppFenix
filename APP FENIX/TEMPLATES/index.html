@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de Pádel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="logo">
+        <h1>FÉNIX GM PÁDEL CLUB</h1>
+        <img src="{{ url_for('static', filename='image/4.png') }}" alt="logo fénix">
+    </div>
+    
+    <div class="container">
+        <h1>APP FENIX</h1>
+        <form action="/add_match" method="post">
+            <label for="rival">Equipo Rival:</label>
+            <input type="text" id="rival" name="rival" required><br>
+        
+            <label for="player1">Jugador 1:</label>
+            <input type="text" id="player1" name="player1" required><br>
+            
+            <label for="player2">Jugador 2:</label>
+            <input type="text" id="player2" name="player2" required><br>
+        
+            <label for="court">Pista:</label>
+            <input type="text" id="court" name="court" required><br>
+            
+            <label for="points_player1">Puntos Jugador 1:</label>
+            <input type="number" id="points_player1" name="points_player1" required><br>
+            
+            <label for="points_player2">Puntos Jugador 2:</label>
+            <input type="number" id="points_player2" name="points_player2" required><br>
+        
+            <label for="points_couple">Resultado Puntos:</label>
+            <input type="text" id="points_couple" name="points_couple" required><br>
+        
+            <label for="result">Resultado Final:</label>
+            <input type="radio" id="ganado" name="result" value="Ganado" required> Ganado
+            <input type="radio" id="perdido" name="result" value="Perdido" required> Perdido<br>
+        
+            <label for="match_date">Fecha y Hora:</label>
+            <input type="datetime-local" id="match_date" name="match_date" required><br>
+        
+            <label for="rival_names">Nombre de Rivales:</label>
+            <input type="text" id="rival_names" name="rival_names" required><br>
+        
+            <label for="observations">Observaciones:</label>
+            <input type="text" id="observations" name="observations"><br>
+        
+            <button type="submit">Registrar</button>
+        </form>           
+    </div>
+
+    <div class="container">
+        <!-- Formulario de búsqueda de jugador -->
+        <h1>Búsqueda de Jugador</h1>
+        <form action="{{ url_for('search') }}" method="post">
+            <label for="player_name">Nombre del Jugador:</label>
+            <input type="text" id="player_name" name="player_name" required>
+            <button type="submit">Buscar</button>
+        </form>        
+    </div>
+
+    <div class="container">
+        <h1>Estadísticas</h1>
+        <!-- Enlaces a las nuevas funcionalidades -->
+        <a href="{{ url_for('stats') }}" class="button">Ver Estadísticas Generales</a>
+        <a href="{{ url_for('strong_pairs') }}" class="button">Ver Parejas Fuertes</a>
+        <a href="{{ url_for('points') }}" class="button">Ver Resumen por partidos jugados</a>
+        <a href="{{ url_for('ranking') }}" class="button">Ver Ranking por Jugadora</a>
+
+    </div>
+
+    <div class="container">
+        <h1>Resultados de Partidos</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Rival</th>
+                <th>Jugador 1</th>
+                <th>Jugador 2</th>
+                <th>Pista</th>
+                <th>Puntos Jugador 1</th>
+                <th>Puntos Jugador 2</th>
+                <th>Resultado Puntos</th>
+                <th>Resultado</th>
+                <th>Total Puntos</th>
+                <th>Fecha y Hora</th>
+                <th>Rivales</th>
+                <th>Observaciones</th>
+                <th>Acciones</th>
+            </tr>
+            {% for match in matches %}
+            <tr>
+                <td>{{ match[0] }}</td>
+                <td>{{ match[1] }}</td>
+                <td>{{ match[2] }}</td>
+                <td>{{ match[3] }}</td>
+                <td>{{ match[4] }}</td>
+                <td>{{ match[5] }}</td>
+                <td>{{ match[6] }}</td>
+                <td>{{ match[7] }}</td>
+                <td>{{ match[8] }}</td>
+                <td>{{ match[9] }}</td>
+                <td>{{ match[10] }}</td>
+                <td>{{ match[11] }}</td>
+                <td>{{ match[12] }}</td>
+                <td>
+                <a href="{{ url_for('edit_match_view', match_id=match[0]) }}">Edit</a>
+                <a href="{{ url_for('delete_match', id=match[0]) }}">Delete</a>
+
+                    <script>
+                        function confirmDelete(id) {
+                            if (confirm('¿Estás seguro de que quieres eliminar este partido?')) {
+                                window.location.href = '/delete_match/' + id;
+                            }
+                        }
+                        </script>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

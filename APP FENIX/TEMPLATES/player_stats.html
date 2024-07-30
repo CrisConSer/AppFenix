@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Estadísticas del Jugador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='player_stats.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Estadísticas de {{ player_name }}</h1>
+        <div class="stats">
+            <h2>Partidos Ganados</h2>
+            <ul class="list-group">
+                {% for match in won_matches %}
+                    <li class="list-group-item">
+                        <strong>Rival:</strong> {{ match[1] }} | 
+                        <strong>Jugador 1:</strong> {{ match[2] }} | 
+                        <strong>Jugador 2:</strong> {{ match[3] }} | 
+                        <strong>Pista:</strong> {{ match[4] }} | 
+                        <strong>Puntos Jugador 1:</strong> {{ match[5] }} | 
+                        <strong>Puntos Jugador 2:</strong> {{ match[6] }} | 
+                        <strong>Total Puntos:</strong> {{ match[7] }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="stats">
+            <h2>Partidos Perdidos</h2>
+            <ul class="list-group">
+                {% for match in lost_matches %}
+                    <li class="list-group-item">
+                        <strong>Rival:</strong> {{ match[1] }} | 
+                        <strong>Jugador 1:</strong> {{ match[2] }} | 
+                        <strong>Jugador 2:</strong> {{ match[3] }} | 
+                        <strong>Pista:</strong> {{ match[4] }} | 
+                        <strong>Puntos Jugador 1:</strong> {{ match[5] }} | 
+                        <strong>Puntos Jugador 2:</strong> {{ match[6] }} | 
+                        <strong>Total Puntos:</strong> {{ match[7] }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

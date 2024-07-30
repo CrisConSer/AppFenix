@@ -1,0 +1,163 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="text"], input[type="number"], input[type="checkbox"], button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #6d0d60;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #8f146a;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #6d0d60;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #8f146a;
+}
+
+.edit-button {
+  background-color: #6d0d60; /* Color verde para botón Editar */
+}
+
+.delete-button {
+  background-color: #dc3545; /* Color rojo para botón Eliminar */
+}
+
+.checkbox-container {
+  display: flex;
+  gap: 16px; /* Espacio entre los checkboxes */
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-item input[type="checkbox"] {
+  opacity: 0; /* Hacer el checkbox nativo invisible */
+  position: absolute; /* Posicionar fuera del flujo normal */
+}
+
+.checkbox-item .checkbox-label {
+  position: relative;
+  display: inline-block;
+  padding-left: 24px; /* Espacio a la izquierda del label */
+  cursor: pointer;
+}
+
+.checkbox-item .checkbox-label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #007bff; /* Borde del checkbox */
+  border-radius: 4px;
+  background-color: white; /* Fondo del checkbox */
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkbox-label:before {
+  background-color: #007bff; /* Color de fondo cuando está seleccionado */
+}
+
+.checkbox-item .checkbox-label:after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  width: 6px;
+  height: 10px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkbox-label:after {
+  opacity: 1;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 20vh; /* Ajusta el tamaño del contenedor al 100% del viewport */
+  text-align: center; /* Alinea el texto centrado */
+}
+
+.logo img {
+  width: 10rem; /* Ancho fijo para la imagen */
+  height: auto; /* Mantiene la proporción */
+}

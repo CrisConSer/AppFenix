@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ranking de Jugadores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+        .high-win-percentage {
+            background-color: #d4edda; /* Verde claro */
+        }
+        .medium-win-percentage {
+            background-color: #fff3cd; /* Naranja claro */
+        }
+        .low-win-percentage {
+            background-color: #f8d7da; /* Rojo claro */
+        }
+    </style>
+</head>
+<body>
+    <h1>Ranking de Jugadores</h1>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Total de Partidos Jugados</th>
+            <th>Partidos Ganados</th>
+            <th>Porcentaje de Victorias (%)</th>
+        </tr>
+        {% for player_stat in player_stats %}
+        <tr class="
+            {% if player_stat[3] >= 60 %}
+                high-win-percentage
+            {% elif player_stat[3] >= 50 %}
+                medium-win-percentage
+            {% else %}
+                low-win-percentage
+            {% endif %}
+        ">
+            <td>{{ player_stat[0] }}</td>
+            <td>{{ player_stat[1] }}</td>
+            <td>{{ player_stat[2] }}</td>
+            <td>{{ player_stat[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/" class="button">Volver</a>
+
+</body>
+</html>
