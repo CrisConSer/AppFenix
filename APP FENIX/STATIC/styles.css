@@ -176,28 +176,41 @@ th {
   height: auto;
 }
 
-.carousel {
-  width: calc(50% - 22px);
-  height: 200px; /* Ajusta la altura según sea necesario */
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 5px;
-  margin-left: 5px; /* Añade margen si es necesario */
+/* styles.css player_profile*/
+
+/* Estilo para el contenedor de la foto y las estadísticas */
+.profile-header {
+  display: flex;
+  align-items: center; /* Centra verticalmente los elementos */
+  margin-bottom: 20px;
 }
 
-.carousel-image {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: opacity 1s ease-in-out;
-  opacity: 0;
+.player-photo {
+  margin-right: 20px; /* Espacio entre la foto y las estadísticas */
+  text-align: right;
+  margin-left: 800px;
 }
 
-.carousel-image:first-child {
-  opacity: 1;
+.profile-img {
+  max-width: 300px; /* Ajusta el tamaño según sea necesario */
+  border-radius: 20%; /* Ajusta el borde para que sea circular */
+  border: 2px solid #ddd; /* Borde para destacar la imagen */
 }
 
+.estadistica {
+  display: inline-block; /* Permite que el contenedor se ajuste a su contenido */
+  text-align: left;
+  margin-left: 10px;
+}
+
+
+.estadistica h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.estadistica p {
+  font-size: 1.1em;
+  line-height: 1.5;
+  color: #666;
+}

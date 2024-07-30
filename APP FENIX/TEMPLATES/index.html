@@ -8,12 +8,23 @@
     <script>
         function toggleResults() {
             var table = document.getElementById("resultsTable");
-            if (table.style.display === "none") {
+            if (table.style.display === "none" || table.style.display === "") {
                 table.style.display = "table";
             } else {
                 table.style.display = "none";
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.button-delete').forEach(function(button) {
+                button.addEventListener('click', function(event) {
+                    var id = this.getAttribute('data-id');
+                    if (!confirm('¿Estás seguro de que quieres eliminar este partido?')) {
+                        event.preventDefault(); // Detiene la navegación si el usuario cancela
+                    }
+                });
+            });
+        });
     </script>
 
 </head>
@@ -122,14 +133,6 @@
                 <td>
                 <a href="{{ url_for('edit_match_view', match_id=match[0]) }}" class="button">Edit</a>
                 <a href="{{ url_for('delete_match', id=match[0]) }}" class="button">Delete</a>
-
-                    <script>
-                        function confirmDelete(id) {
-                            if (confirm('¿Estás seguro de que quieres eliminar este partido?')) {
-                                window.location.href = '/delete_match/' + id;
-                            }
-                        }
-                        </script>
                 </td>
             </tr>
             {% endfor %}
