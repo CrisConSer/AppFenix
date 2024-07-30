@@ -17,32 +17,34 @@
         }
     </style>
 </head>
-<body>
-    <h1>Ranking de Jugadores</h1>
-    <table>
-        <tr>
-            <th>Nombre</th>
-            <th>Total de Partidos Jugados</th>
-            <th>Partidos Ganados</th>
-            <th>Porcentaje de Victorias (%)</th>
-        </tr>
-        {% for player_stat in player_stats %}
-        <tr class="
-            {% if player_stat[3] >= 60 %}
-                high-win-percentage
-            {% elif player_stat[3] >= 50 %}
-                medium-win-percentage
-            {% else %}
-                low-win-percentage
-            {% endif %}
-        ">
-            <td>{{ player_stat[0] }}</td>
-            <td>{{ player_stat[1] }}</td>
-            <td>{{ player_stat[2] }}</td>
-            <td>{{ player_stat[3] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+<div>
+    <div class="container-1">
+        <h1>Ranking de Jugadores</h1>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Total de Partidos Jugados</th>
+                <th>Partidos Ganados</th>
+                <th>Porcentaje de Victorias (%)</th>
+            </tr>
+            {% for player_stat in player_stats %}
+            <tr class="
+                {% if player_stat[3] >= 60 %}
+                    high-win-percentage
+                {% elif player_stat[3] >= 50 %}
+                    medium-win-percentage
+                {% else %}
+                    low-win-percentage
+                {% endif %}
+            ">
+                <td>{{ player_stat[0] }}</td>
+                <td>{{ player_stat[1] }}</td>
+                <td>{{ player_stat[2] }}</td>
+                <td>{{ player_stat[3] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
     <br>
     <a href="/" class="button">Volver</a>
 

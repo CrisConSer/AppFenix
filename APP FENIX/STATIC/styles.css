@@ -1,22 +1,32 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
-.container {
-  width: 80%;
-  margin: 0 auto;
+
+.container-2 {
+  width: 90%;
+  margin: 20px auto;
   padding: 20px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.container-1 {
+  width: 50%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
 
 h1, h2 {
-  color: #333;
+  color: #444;
 }
 
 form {
@@ -25,15 +35,17 @@ form {
 
 label {
   display: block;
-  margin-top: 10px;
+  margin: 10px 0 5px;
 }
 
 input[type="text"], input[type="number"], input[type="checkbox"], button {
-  width: 100%;
+  width: calc(100% - 22px);
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 4px;
+  display: inline-block;
+  box-sizing: border-box; 
 }
 
 button {
@@ -41,7 +53,8 @@ button {
   color: #fff;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.3s;
+  width: calc(100% - 22px);
 }
 
 button:hover {
@@ -55,26 +68,25 @@ table {
 }
 
 table, th, td {
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
 }
 
 th, td {
-  padding: 8px;
+  padding: 10px;
   text-align: left;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #f8f8f8;
 }
 
 .button {
   display: inline-block;
-  padding: 8px 16px;
+  padding: 10px 20px;
   background-color: #6d0d60;
   color: white;
   text-align: center;
   text-decoration: none;
-  border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -85,16 +97,18 @@ th {
 }
 
 .edit-button {
-  background-color: #6d0d60; /* Color verde para botón Editar */
+  background-color: #4CAF50; /* Color verde para botón Editar */
+  color: #fff;
 }
 
 .delete-button {
-  background-color: #dc3545; /* Color rojo para botón Eliminar */
+  background-color: #f44336; /* Color rojo para botón Eliminar */
+  color: #fff;
 }
 
 .checkbox-container {
   display: flex;
-  gap: 16px; /* Espacio entre los checkboxes */
+  gap: 16px;
 }
 
 .checkbox-item {
@@ -103,14 +117,14 @@ th {
 }
 
 .checkbox-item input[type="checkbox"] {
-  opacity: 0; /* Hacer el checkbox nativo invisible */
-  position: absolute; /* Posicionar fuera del flujo normal */
+  opacity: 0;
+  position: absolute;
 }
 
 .checkbox-item .checkbox-label {
   position: relative;
   display: inline-block;
-  padding-left: 24px; /* Espacio a la izquierda del label */
+  padding-left: 24px;
   cursor: pointer;
 }
 
@@ -121,13 +135,13 @@ th {
   top: 0;
   width: 18px;
   height: 18px;
-  border: 2px solid #007bff; /* Borde del checkbox */
+  border: 2px solid #6d0d60;
   border-radius: 4px;
-  background-color: white; /* Fondo del checkbox */
+  background-color: white;
 }
 
 .checkbox-item input[type="checkbox"]:checked + .checkbox-label:before {
-  background-color: #007bff; /* Color de fondo cuando está seleccionado */
+  background-color: #6d0d60;
 }
 
 .checkbox-item .checkbox-label:after {
@@ -153,11 +167,37 @@ th {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 20vh; /* Ajusta el tamaño del contenedor al 100% del viewport */
-  text-align: center; /* Alinea el texto centrado */
+  height: 20vh;
+  text-align: center;
 }
 
 .logo img {
-  width: 10rem; /* Ancho fijo para la imagen */
-  height: auto; /* Mantiene la proporción */
+  width: 10rem;
+  height: auto;
 }
+
+.carousel {
+  width: calc(50% - 22px);
+  height: 200px; /* Ajusta la altura según sea necesario */
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 5px;
+  margin-left: 5px; /* Añade margen si es necesario */
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
+}
+
+.carousel-image:first-child {
+  opacity: 1;
+}
+
