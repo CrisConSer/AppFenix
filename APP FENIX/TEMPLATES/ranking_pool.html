@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ranking de Pools</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+  <div class="container-1">
+    <h1>Ranking de Jugadoras en Pools</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre Jugadora</th>
+                <th>Veces Jugadas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jugadora, veces_jugadas in ranking %}
+            <tr>
+                <td>{{ jugadora }}</td>
+                <td>{{ veces_jugadas }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+    <!-- Enlace para volver a la página de registro de pools -->
+    <a href="{{ url_for('pool') }}" class="button">Volver a Registrar Pool</a>
+</body>
+</html>

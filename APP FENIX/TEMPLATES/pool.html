@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Pool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+  <div class="container-1">
+    <h1>Registrar Pool</h1>
+    <form method="POST" action="{{ url_for('pool') }}">
+      <label for="reves">Nombre Jugadora Revés:</label>
+      <input type="text" id="reves" name="reves" required>
+      <br>
+      <label for="derecha">Nombre Jugadora Derecha:</label>
+      <input type="text" id="derecha" name="derecha" required>
+      <br>
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" name="fecha" required>
+      <br>
+      <label for="observaciones">Observaciones:</label>
+      <textarea id="observaciones" name="observaciones"></textarea>
+      <br>
+      <button type="submit">Guardar</button>
+  </form>
+</div>
+  
+<div class="container-1">
+    <h2>Ver Todas las Pool</h2>
+    <a href="{{ url_for('view_all_pools') }}" class="button">Ver Todas las Pool</a>
+    <a href="{{ url_for('ranking_pool') }}" class="button">Ranking Pool</a>
+</div>
+    <br><br>
+    <a href="/" class="button">Volver</a>
+</body>
+</html>

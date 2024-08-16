@@ -22,7 +22,13 @@ def init_db():
                             date TEXT,
                             time TEXT,
                             observations TEXT)''')
-        conn.commit()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS pool (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            reves TEXT,
+                            derecha TEXT,
+                            fecha TEXT,
+                            observaciones TEXT)''')
+    conn.commit()
 
 # Ruta principal
 @app.route('/')
@@ -356,6 +362,129 @@ def plot_player(name):
     plt.close()
 
     return send_file(buf, mimetype='image/png')
+
+# Ruta para agregar o mostrar pools
+@app.route('/pool', methods=['GET', 'POST'])
+def pool():
+    if request.method == 'POST':
+        reves = request.form.get('reves')
+        derecha = request.form.get('derecha')
+        fecha = request.form.get('fecha')
+        observaciones = request.form.get('observaciones')
+
+        # Verificar que los datos necesarios estén presentes
+        if reves and derecha and fecha:
+            # Guardar los datos en la base de datos
+            with sqlite3.connect('database.db') as conn:
+                cursor = conn.cursor()
+                cursor.execute('''
+                    INSERT INTO pool (reves, derecha, fecha, observaciones)
+                    VALUES (?, ?, ?, ?)
+                ''', (reves, derecha, fecha, observaciones))
+                conn.commit()
+            
+            
+            return redirect(url_for('pool'))
+        else:
+            # Manejar el caso en que falten datos (opcional)
+           
+            return redirect(url_for('pool'))
+
+    # Método GET: Mostrar el formulario para registrar una pool
+    return render_template('pool.html')
+
+#Ruta para modificar una pool
+@app.route('/edit_pool/<int:pool_id>', methods=['GET', 'POST'])
+def edit_pool(pool_id):
+    with sqlite3.connect('database.db') as conn:
+        cursor = conn.cursor()
+        if request.method == 'POST':
+            reves = request.form.get('reves')
+            derecha = request.form.get('derecha')
+            fecha = request.form.get('fecha')
+            observaciones = request.form.get('observaciones')
+
+            cursor.execute('''
+                UPDATE pool
+                SET reves = ?, derecha = ?, fecha = ?, observaciones = ?
+                WHERE id = ?
+            ''', (reves, derecha, fecha, observaciones, pool_id))
+            conn.commit()
+            return redirect(url_for('view_all_pools'))
+
+        cursor.execute('SELECT reves, derecha, fecha, observaciones FROM pool WHERE id = ?', (pool_id,))
+        pool = cursor.fetchone()
+    
+    return render_template('edit_pool.html', pool=pool, pool_id=pool_id)
+
+        
+#Ruta para eliminar una pool
+@app.route('/delete_pool/<int:pool_id>', methods=['POST'])
+def delete_pool(pool_id):
+    with sqlite3.connect('database.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM pool WHERE id = ?', (pool_id,))
+        conn.commit()
+    
+    return redirect(url_for('view_all_pools'))
+
+
+# Ruta para ver todas las Pool
+@app.route('/view_all_pools')
+def view_all_pools():
+    with sqlite3.connect('database.db') as conn:
+        cursor = conn.cursor()
+        
+        # Obtener Pools por Fecha
+        cursor.execute('''
+            SELECT reves, derecha, fecha, COUNT(*) as times_played, id
+            FROM pool
+            GROUP BY reves, derecha, fecha
+            ORDER BY times_played DESC
+        ''')
+        pools_by_date = cursor.fetchall()
+
+        # Obtener Contador de Parejas Jugadoras
+        cursor.execute('''
+            SELECT reves, derecha, COUNT(*) as times_played_together
+            FROM pool
+            GROUP BY reves, derecha
+            ORDER BY times_played_together DESC
+        ''')
+        pairs_count = cursor.fetchall()
+    
+    return render_template('view_all_pools.html', pools_by_date=pools_by_date, pairs_count=pairs_count)
+
+#Ranking jugadora de pool
+@app.route('/ranking_pool')
+def ranking_pool():
+    with sqlite3.connect('database.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT reves AS jugadora, COUNT(*) AS veces_jugadas
+            FROM pool
+            GROUP BY reves
+            UNION ALL
+            SELECT derecha AS jugadora, COUNT(*) AS veces_jugadas
+            FROM pool
+            GROUP BY derecha
+        ''')
+        rows = cursor.fetchall()
+
+    # Crear un diccionario para contar las veces jugadas por cada jugadora
+    ranking = {}
+    for row in rows:
+        jugadora, veces_jugadas = row
+        if jugadora in ranking:
+            ranking[jugadora] += veces_jugadas
+        else:
+            ranking[jugadora] = veces_jugadas
+
+    # Ordenar por el número de veces jugadas, en orden descendente
+    sorted_ranking = sorted(ranking.items(), key=lambda x: x[1], reverse=True)
+
+    return render_template('ranking_pool.html', ranking=sorted_ranking)
+
 
 if __name__ == '__main__':
     init_db()

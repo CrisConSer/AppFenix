@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Pools</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+  <div class="container-1">
+    <h1>Listado de Pools</h1>
+    
+    <!-- Tabla para Pools por Fecha -->
+    <h2>Pools por Fecha</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre Jugadora Revés</th>
+                <th>Nombre Jugadora Derecha</th>
+                <th>Fecha</th>
+                <th>Veces Jugadas</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pool in pools_by_date %}
+            <tr>
+                <td>{{ pool[0] if pool[0] is not none else 'Desconocido' }}</td>
+                <td>{{ pool[1] if pool[1] is not none else 'Desconocido' }}</td>
+                <td>{{ pool[2] if pool[2] is not none else 'Desconocido' }}</td>
+                <td>{{ pool[3] }}</td>
+                <td>
+                    <!--<form action="{{ url_for('edit_pool', pool_id=pool[4]) }}" method="post" style="display:inline;">
+                      <button type="submit">Modificar</button>
+                  </form> -->
+                    <form action="{{ url_for('delete_pool', pool_id=pool[4]) }}" method="post" style="display:inline;">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Tabla para Contador de Parejas Jugadoras -->
+    <h2>Contador de Parejas Jugadoras</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre Jugadora Revés</th>
+                <th>Nombre Jugadora Derecha</th>
+                <th>Veces Jugadas Juntas</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pair in pairs_count %}
+            <tr>
+                <td>{{ pair[0] if pair[0] is not none else 'Desconocido' }}</td>
+                <td>{{ pair[1] if pair[1] is not none else 'Desconocido' }}</td>
+                <td>{{ pair[2] }}</td>
+                <td>
+                    <!-- Suponiendo que quieres eliminar una pool relacionada, pero en este caso no tenemos esa funcionalidad -->
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+    <br>
+    <a href="{{ url_for('pool') }}" class="button">Volver</a>
+
+
+</body>
+</html>
